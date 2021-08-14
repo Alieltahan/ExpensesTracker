@@ -29,21 +29,38 @@ const DUMMY_EXPENSES = [
 const App = () => {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
+  // const year = dateNow.getFullYear();
+  // const [filteredYear, setFilteredYear] = useState(`${year}`);
+
+  const yearArray = expenses.map((y) => y.date.getFullYear().toString());
+  const yearList = Array.from(new Set(yearArray));
+
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
       return [expense, ...prevExpenses];
     });
   };
 
-  handleDelItem= (e) ={
-    console.log(e.target); 
-  }
+  // const filterChangeHandler = (selectedYear) => {
+  //   console.log(selectedYear);
+  //   // setFilteredYear(selectedYear);
+  // };
+
+  const handleDelItem = (id) => {
+    const updatedExpense = expenses.filter((exp) => exp.id !== id);
+    setExpenses(updatedExpense);
+  };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses}
-       />
+      <Expenses
+        items={expenses}
+        onHandleClick={handleDelItem}
+        handleYear={yearList}
+        // filterYearChange={filterChangeHandler}
+        // filteredYear={filteredYear}
+      />
     </div>
   );
 };

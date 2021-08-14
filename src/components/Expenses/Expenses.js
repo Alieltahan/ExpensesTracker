@@ -7,12 +7,21 @@ import ExpensesChart from "./ExpensesChart";
 import "./Expenses.css";
 
 const Expenses = (props) => {
-  const dateNow = new Date();
+  // const [yearList, setYearList] = useState("");
 
+  // props.handleYear.length === 1 && setFilteredYear(props.handleYear[0]);
+  // const yearArray = props.items.map((y) => y.date.getFullYear().toString());
+  // const yearList = Array.from(new Set(yearArray));
+
+  // console.log(yearList);
+  // yearList.length === 0 && setFilteredYear(yearList[0]);
+  // console.log(yearList);
+  const dateNow = new Date();
   const year = dateNow.getFullYear();
   const [filteredYear, setFilteredYear] = useState(`${year}`);
 
   const filterChangeHandler = (selectedYear) => {
+    console.log(selectedYear);
     setFilteredYear(selectedYear);
   };
 
@@ -26,9 +35,15 @@ const Expenses = (props) => {
         <ExpensesFilter
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
+          items={props.items}
+          yearList={props.handleYear}
+          filterYearChange={filterChangeHandler}
         />
         <ExpensesChart expenses={filteredExpenses} />
-        <ExpensesList items={filteredExpenses} />
+        <ExpensesList
+          onHandleDelItem={props.onHandleClick}
+          items={filteredExpenses}
+        />
       </Card>
     </div>
   );

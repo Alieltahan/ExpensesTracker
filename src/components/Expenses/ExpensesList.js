@@ -17,16 +17,18 @@ const ExpensesList = (props) => {
 
   return (
     <ul className="expenses-list">
-      {props.items.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          id={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-          onHandleDelItem={props.onHandleDelItem}
-        />
-      ))}
+      {!props.items
+        ? null
+        : props.items.map((expense) => (
+            <ExpenseItem
+              key={expense.id}
+              id={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+              onHandleDelItem={props.onHandleDelItem}
+            />
+          ))}
       <div className="card expense-item ">
         <div className="expense-item__description expense-item__description--title">
           <h2>Total</h2>{" "}

@@ -22,9 +22,9 @@ const Expenses = (props) => {
 
   const filteredExpenses = props.items.filter((expense) => {
     return filteredMonth === "All"
-      ? expense.date.getFullYear().toString() === filteredYear
-      : expense.date.getFullYear().toString() === filteredYear &&
-          expense.date.getMonth().toString() === filteredMonth;
+      ? new Date(expense.date).getFullYear().toString() === filteredYear
+      : new Date(expense.date).getFullYear().toString() === filteredYear &&
+          new Date(expense.date).getMonth().toString() === filteredMonth;
   });
 
   return (

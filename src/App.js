@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
@@ -33,27 +33,29 @@ const DUMMY_EXPENSES = [
 ];
 
 const App = () => {
+  const initialState = () =>
+    JSON.parse(localStorage.getItem("bookExpenses") || null);
+
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [localStorageExpenses, setlocalStorageExpenses] =
+    useState(initialState);
 
-  // const year = dateNow.getFullYear();
-  // const [filteredYear, setFilteredYear] = useState(`${year}`);
-
-  // const yearArray = expenses.map((y) => y.date.getFullYear().toString());
-  // const yearList = Array.from(new Set(yearArray));
-  // if (yearList.length === 1) {
-  //   console.log("YEA");
-  // }
+  useEffect(
+    () =>
+      window.localStorage.setItem(
+        "bookExpenses",
+        JSON.stringify(localStorageExpenses)
+      ),
+    [localStorageExpenses]
+  );
 
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
       return [expense, ...prevExpenses];
     });
+    // localStorage.setItem("bookExpenses", JSON.stringify(expenses));
+    setlocalStorageExpenses(expenses);
   };
-
-  // const filterChangeHandler = (selectedYear) => {
-  //   console.log(selectedYear);
-  //   // setFilteredYear(selectedYear);
-  // };
 
   const handleDelItem = (id) => {
     const updatedExpense = expenses.filter((exp) => exp.id !== id);
@@ -63,13 +65,7 @@ const App = () => {
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses
-        items={expenses}
-        onHandleClick={handleDelItem}
-        // handleYear={yearList}
-        // filterYearChange={filterChangeHandler}
-        // filteredYear={filteredYear}
-      />
+      <Expenses items={expenses} onHandleClick={handleDelItem} />
     </div>
   );
 };

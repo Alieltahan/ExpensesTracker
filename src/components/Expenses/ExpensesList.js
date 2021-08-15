@@ -37,9 +37,10 @@ const ExpensesList = (props) => {
           )}
         </div>
       </div>
-      <p className="expenses-item__pragraph">
+      <div className="expenses-item__pragraph">
         Expenses tracker App for the past 2 years
-      </p>
+        <div>&copy; 2021</div>
+      </div>
     </ul>
   );
 };

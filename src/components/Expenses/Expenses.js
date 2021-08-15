@@ -7,27 +7,24 @@ import ExpensesChart from "./ExpensesChart";
 import "./Expenses.css";
 
 const Expenses = (props) => {
-  // const [yearList, setYearList] = useState("");
-
-  // props.handleYear.length === 1 && setFilteredYear(props.handleYear[0]);
-  // const yearArray = props.items.map((y) => y.date.getFullYear().toString());
-  // const yearList = Array.from(new Set(yearArray));
-
-  // console.log(yearList);
-  // yearList.length === 0 && setFilteredYear(yearList[0]);
-  // console.log(yearList);
   const dateNow = new Date();
   const year = dateNow.getFullYear();
   const [filteredYear, setFilteredYear] = useState(`${year}`);
+  const [filteredMonth, setFilteredMonth] = useState("All");
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
 
-  // const filteredExpenses = props.items.filter((expense) => {
+  const handleFilterMonth = (selectedMonth) => {
+    setFilteredMonth(selectedMonth);
+  };
+
   const filteredExpenses = props.items.filter((expense) => {
-    console.log(expense.date.getFullYear().toString(), "Filter");
-    return expense.date.getFullYear().toString() === filteredYear;
+    return filteredMonth === "All"
+      ? expense.date.getFullYear().toString() === filteredYear
+      : expense.date.getFullYear().toString() === filteredYear &&
+          expense.date.getMonth().toString() === filteredMonth;
   });
 
   return (
@@ -36,9 +33,9 @@ const Expenses = (props) => {
         <ExpensesFilter
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
+          onChangeFilterMonth={handleFilterMonth}
           items={props.items}
-          yearList={props.handleYear}
-          // filterYearChange={filterChangeHandler}
+          selectedMonth={filteredMonth}
         />
         <ExpensesChart expenses={filteredExpenses} />
         <ExpensesList

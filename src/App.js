@@ -6,6 +6,12 @@ import Expenses from "./components/Expenses/Expenses";
 
 const DUMMY_EXPENSES = [
   {
+    id: "e5",
+    title: "New Desk (Wooden)",
+    amount: 450,
+    date: new Date(2019, 5, 12),
+  },
+  {
     id: "e1",
     title: "Toilet Paper",
     amount: 94.12,
@@ -32,8 +38,11 @@ const App = () => {
   // const year = dateNow.getFullYear();
   // const [filteredYear, setFilteredYear] = useState(`${year}`);
 
-  const yearArray = expenses.map((y) => y.date.getFullYear().toString());
-  const yearList = Array.from(new Set(yearArray));
+  // const yearArray = expenses.map((y) => y.date.getFullYear().toString());
+  // const yearList = Array.from(new Set(yearArray));
+  // if (yearList.length === 1) {
+  //   console.log("YEA");
+  // }
 
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
@@ -57,7 +66,7 @@ const App = () => {
       <Expenses
         items={expenses}
         onHandleClick={handleDelItem}
-        handleYear={yearList}
+        // handleYear={yearList}
         // filterYearChange={filterChangeHandler}
         // filteredYear={filteredYear}
       />

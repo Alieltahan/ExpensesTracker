@@ -7,3 +7,9 @@
   color: white;
   text-align: center;
 }
+
+.expenses-item__pragraph {
+  color: wheat;
+  text-align: center;
+  font-size: 0.8rem;
+}

@@ -1,8 +1,9 @@
 .new-expense {
-  background-color: #a892ee;
+  background-color: #4460dd;
   padding: 1rem;
   margin: 2rem auto;
   width: 50rem;
+  min-width: fit-content;
   max-width: 95%;
   border-radius: 12px;
   text-align: center;
@@ -13,8 +14,8 @@
   font: inherit;
   cursor: pointer;
   padding: 1rem 2rem;
-  border: 1px solid #40005d;
-  background-color: #40005d;
+  border: 1px solid #220d83;
+  background-color: #132099;
   color: white;
   border-radius: 12px;
   margin-right: 1rem;

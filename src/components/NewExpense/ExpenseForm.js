@@ -57,6 +57,9 @@ const ExpenseForm = (props) => {
     setEnteredAmount("");
     setEnteredDate("");
   };
+  const year = dateNow.getFullYear();
+  const maxYear = `${year}-12-31`;
+  const minYear = `${year - 2}-01-01`;
 
   return (
     <form onSubmit={submitHandler}>
@@ -85,8 +88,8 @@ const ExpenseForm = (props) => {
           <label>Date</label>
           <input
             type="date"
-            min="01-01-2019"
-            max="31-12-2060"
+            min={minYear}
+            max={maxYear}
             defaultValue={date}
             onChange={dateChangeHandler}
           />
